@@ -70,4 +70,19 @@ async def on_raw_reaction_remove(payload):
         if role:
             await member.remove_roles(role)
             print(f"Removing {role.name} from {member.name}")
+
+    if message.id ==  MESSAGE_ID_FLAGS,:
+        # Ajouter une réaction (ici un emoji classique, exemple le pouce en l'air)
+        await message.add_reaction('🇫🇷')
+
+        await message.add_reaction('🇬🇧')
+
+        await message.add_reaction('🇪🇸')
+
+        await message.add_reaction('🇵🇹')
+
+        await message.add_reaction('🇷🇺')
+
+        await message.add_reaction('🇸🇦')
+        
 bot.run(TOKEN)
