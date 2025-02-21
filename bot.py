@@ -1,5 +1,20 @@
 import discord
 from discord.ext import commands
+from flask import Flask
+from threading import Thread
+
+app = Flask(__name__)
+@app.route('/')
+def home():
+    return "Bot is running!"
+def run():
+    app.run(host='0.0.0.0', port=25565)
+def start_flask():
+    t = Thread(target=run)
+    t.start()
+if __name__ == "__main__":
+    start_flask()
+
 TOKEN = "MTM0MjMyNzY3Njk5NTg5OTQ4Mw.G7gTJC.asmdXKHVSYVrSRlLq7jCA0q_ZXVdVNJZiWBJNA"
 MESSAGE_ID = 123456789012345678
 MESSAGE_ID_FLAGS = 1342331752319811616
