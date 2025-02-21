@@ -74,7 +74,7 @@ async def on_raw_reaction_remove(payload):
 
 @bot.event
 async def on_message(message):
-    if message.id ==  MESSAGE_ID_FLAGS,:
+    if message.id ==  MESSAGE_ID_FLAGS:
         await message.add_reaction('🇫🇷')
         await message.add_reaction('🇬🇧')
         await message.add_reaction('🇪🇸')
