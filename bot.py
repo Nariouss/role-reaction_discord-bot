@@ -106,7 +106,7 @@ async def unreact(ctx, message_id: int, emoji: str):
 
 @bot.command()
 async def react(ctx, message_id: int, emoji: str):
-if ctx.author.id not in AUTHORIZED_USER_ID:
+    if ctx.author.id not in AUTHORIZED_USER_ID:
         await ctx.send(f"```ini\n[ Reaction Add ]\n\nYou are not allowed to use this command```")
         return
     try:
