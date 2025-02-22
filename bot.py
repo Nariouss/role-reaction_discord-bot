@@ -31,15 +31,18 @@ FLAG_ROLES = {
     "🇸🇦": 1342299906605449266,
 }
 AUTHORIZED_USER_ID = 1192627953989857421
+
 intents = discord.Intents.default()
 intents.message_content = True
 intents.reactions = True
 intents.guilds = True
 intents.members = True
-bot = commands.Bot(command_prefix="sudo", intents=intents)
+bot = commands.Bot(command_prefix="sudo ", intents=intents)
+
 @bot.event
 async def on_ready():
     print(f"Connected as{bot.user}")
+    
 @bot.event
 async def on_raw_reaction_add(payload):
     guild = bot.get_guild(payload.guild_id)
@@ -56,6 +59,7 @@ async def on_raw_reaction_add(payload):
         if role:
             await member.add_roles(role)
             print(f"Adding {role.name} to {member.name}")
+            
 @bot.event
 async def on_raw_reaction_remove(payload):
     guild = bot.get_guild(payload.guild_id)
@@ -78,7 +82,6 @@ async def react(ctx, message_id: int, emoji: str):
     if ctx.author.id != AUTHORIZED_USER_ID:
         await ctx.send(f"```ini\n[ Reaction Add ]\n\nYou are not allowed to use this command```")
         return
-
     try:
         message = await ctx.channel.fetch_message(message_id)
         await message.add_reaction(emoji)
@@ -87,5 +90,19 @@ async def react(ctx, message_id: int, emoji: str):
         await ctx.send(f"```ini\n[ Reaction Add ]\n\nUnfound Message```")
     except discord.HTTPException as e:
         await ctx.send(f"```ini\n[ Reaction Add ]\n\nError {e}```")
-        
+
+@bot.command()
+async def sendmsg(ctx, *, message: str):
+    if ctx.author.id not in AUTHORIZED_USERS:
+        await ctx.send("```ini\n[ Send Message ]\n\nYou are not allowed to use this command```")
+        return
+    await ctx.send(message)
+
+@bot.command()
+async def replymsg(ctx, *, message: str):
+    if ctx.author.id not in AUTHORIZED_USERS:
+        await ctx.send("```ini\n[ Reply Message ]\n\nYou are not allowed to use this command```")
+        return
+    await ctx.reply(message)
+
 bot.run(TOKEN)
