@@ -30,12 +30,13 @@ FLAG_ROLES = {
     "🇷🇺": 1342299876419178496,
     "🇸🇦": 1342299906605449266,
 }
+AUTHORIZED_USER_ID = [1192627953989857421]
 intents = discord.Intents.default()
 intents.message_content = True
 intents.reactions = True
 intents.guilds = True
 intents.members = True
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix="sudo", intents=intents)
 @bot.event
 async def on_ready():
     print(f"Connected as{bot.user}")
@@ -72,14 +73,19 @@ async def on_raw_reaction_remove(payload):
             await member.remove_roles(role)
             print(f"Removing {role.name} from {member.name}")
 
-@bot.event
-async def on_message(message):
-    if message.id ==  MESSAGE_ID_FLAGS:
-        await message.add_reaction('🇫🇷')
-        await message.add_reaction('🇬🇧')
-        await message.add_reaction('🇪🇸')
-        await message.add_reaction('🇵🇹')
-        await message.add_reaction('🇷🇺')
-        await message.add_reaction('🇸🇦')
+@bot.command()
+async def react(ctx, message_id: int, emoji: str):
+    if ctx.author.id != AUTHORIZED_USER_ID:
+        await ctx.send(f"```ini\n[ Reaction Add ]\n\nYou are not allowed to use this command```")
+        return
+
+    try:
+        message = await ctx.channel.fetch_message(message_id)
+        await message.add_reaction(emoji)
+        await ctx.send(f"```ini\n[ Reaction Add ]\n\nReaction {emoji} added to message {message_id} successfuly```")
+    except discord.NotFound:
+        await ctx.send(f"```ini\n[ Reaction Add ]\n\nUnfound Message```")
+    except discord.HTTPException as e:
+        await ctx.send(f"```ini\n[ Reaction Add ]\n\nError {e}```")
         
 bot.run(TOKEN)
