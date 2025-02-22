@@ -91,7 +91,7 @@ async def on_raw_reaction_remove(payload):
             print(f"Removing {role.name} from {member.name}")
 
 @bot.command()
-async def unreact(ctx, message_id: int, emoji: str):
+async def unreact(ctx, member, message_id: int, emoji: str):
     if ctx.author.id not in AUTHORIZED_USER_ID:
         await ctx.send(f"```ini\n[ Reaction Remove ]\n\nYou are not allowed to use this command```")
         return
