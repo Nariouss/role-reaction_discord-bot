@@ -120,14 +120,14 @@ async def react(ctx, message_id: int, emoji: str):
         
 @bot.command()
 async def sendmsg(ctx, *, message: str):
-if ctx.author.id not in AUTHORIZED_USER_ID:
+    if ctx.author.id not in AUTHORIZED_USER_ID:
         await ctx.send("```ini\n[ Send Message ]\n\nYou are not allowed to use this command```")
         return
     await ctx.send(message)
 
 @bot.command()
 async def replymsg(ctx, *, message: str):
-if ctx.author.id not in AUTHORIZED_USER_ID:
+    if ctx.author.id not in AUTHORIZED_USER_ID:
         await ctx.send("```ini\n[ Reply Message ]\n\nYou are not allowed to use this command```")
         return
     await ctx.reply(message)
