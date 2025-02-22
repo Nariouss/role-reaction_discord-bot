@@ -30,7 +30,7 @@ FLAG_ROLES = {
     "🇷🇺": 1342299876419178496,
     "🇸🇦": 1342299906605449266,
 }
-AUTHORIZED_USER_ID = [1192627953989857421]
+AUTHORIZED_USER_ID = 1192627953989857421
 intents = discord.Intents.default()
 intents.message_content = True
 intents.reactions = True
