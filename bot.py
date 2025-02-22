@@ -30,7 +30,7 @@ FLAG_ROLES = {
     "🇷🇺": 1342299876419178496,
     "🇸🇦": 1342299906605449266,
 }
-AUTHORIZED_USER_ID = 1192627953989857421
+AUTHORIZED_USER_ID = [1192627953989857421]
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -79,7 +79,7 @@ async def on_raw_reaction_remove(payload):
 
 @bot.command()
 async def react(ctx, message_id: int, emoji: str):
-    if ctx.author.id != AUTHORIZED_USER_ID:
+if ctx.author.id not in AUTHORIZED_USER_ID:
         await ctx.send(f"```ini\n[ Reaction Add ]\n\nYou are not allowed to use this command```")
         return
     try:
@@ -93,14 +93,14 @@ async def react(ctx, message_id: int, emoji: str):
 
 @bot.command()
 async def sendmsg(ctx, *, message: str):
-    if ctx.author.id != AUTHORIZED_USER_ID:
+if ctx.author.id not in AUTHORIZED_USER_ID:
         await ctx.send("```ini\n[ Send Message ]\n\nYou are not allowed to use this command```")
         return
     await ctx.send(message)
 
 @bot.command()
 async def replymsg(ctx, *, message: str):
-    if ctx.author.id != AUTHORIZED_USER_ID:
+if ctx.author.id not in AUTHORIZED_USER_ID:
         await ctx.send("```ini\n[ Reply Message ]\n\nYou are not allowed to use this command```")
         return
     await ctx.reply(message)
