@@ -1,4 +1,6 @@
 import discord
+import datetime
+import time
 from discord.ext import commands
 from flask import Flask
 from threading import Thread
@@ -132,12 +134,12 @@ async def replymsg(ctx, *, message: str):
         return
     await ctx.reply(message)
 
-@bot.event
+@bot.command()
 async def ping(ctx):
     start_time = datetime.datetime.now(datetime.timezone.utc)
     message = await ctx.reply('Pong')
     end_time = datetime.datetime.now(datetime.timezone.utc)
     ms = (end_time - start_time).total_seconds() * 1000
-    await message.edit(content=f'```ini\n\nPong, Took: {int(ms)}ms```')
+    await message.edit(content=f'```ini\5n\nPong, Took: {int(ms)}ms```')
 
 bot.run(TOKEN)
