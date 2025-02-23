@@ -132,4 +132,11 @@ async def replymsg(ctx, *, message: str):
         return
     await ctx.reply(message)
 
+async def ping(ctx):
+    start_time = datetime.datetime.now(datetime.timezone.utc)
+    message = await ctx.reply('Pong')
+    end_time = datetime.datetime.now(datetime.timezone.utc)
+    ms = (end_time - start_time).total_seconds() * 1000
+    await message.edit(content=f'Pong, Took: {int(ms)}ms')
+
 bot.run(TOKEN)
