@@ -132,6 +132,7 @@ async def replymsg(ctx, *, message: str):
         return
     await ctx.reply(message)
 
+@bot.command()
 async def ping(ctx):
     start_time = datetime.datetime.now(datetime.timezone.utc)
     message = await ctx.reply('Pong')
