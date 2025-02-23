@@ -95,42 +95,42 @@ async def on_raw_reaction_remove(payload):
 @bot.command()
 async def unreact(ctx, member, message_id: int, emoji: str):
     if ctx.author.id not in AUTHORIZED_USER_ID:
-        await ctx.send(f"```ini\n[ Reaction Remove ]\n\nYou are not allowed to use this command```")
+        await ctx.reply(f"```ini\n[ Reaction Remove ]\n\nYou are not allowed to use this command```")
         return
     try:
         message = await ctx.channel.fetch_message(message_id)
         await message.remove_reaction(emoji)
-        await ctx.send(f"```ini\n[ Reaction Remove ]\n\nReaction {emoji} removed from message {message_id} successfuly```")
+        await ctx.reply(f"```ini\n[ Reaction Remove ]\n\nReaction {emoji} removed from message {message_id} successfuly```")
     except discord.NotFound:
-        await ctx.send(f"```ini\n[ Reaction Remove ]\n\nUnfound Message```")
+        await ctx.reply(f"```ini\n[ Reaction Remove ]\n\nUnfound Message```")
     except discord.HTTPException as e:
-        await ctx.send(f"```ini\n[ Reaction Remove ]\n\nError {e}```")
+        await ctx.reply(f"```ini\n[ Reaction Remove ]\n\nError {e}```")
 
 @bot.command()
 async def react(ctx, message_id: int, emoji: str):
     if ctx.author.id not in AUTHORIZED_USER_ID:
-        await ctx.send(f"```ini\n[ Reaction Add ]\n\nYou are not allowed to use this command```")
+        await ctx.reply(f"```ini\n[ Reaction Add ]\n\nYou are not allowed to use this command```")
         return
     try:
         message = await ctx.channel.fetch_message(message_id)
         await message.add_reaction(emoji)
-        await ctx.send(f"```ini\n[ Reaction Add ]\n\nReaction {emoji} added to message {message_id} successfuly```")
+        await ctx.reply(f"```ini\n[ Reaction Add ]\n\nReaction {emoji} added to message {message_id} successfuly```")
     except discord.NotFound:
-        await ctx.send(f"```ini\n[ Reaction Add ]\n\nUnfound Message```")
+        await ctx.reply(f"```ini\n[ Reaction Add ]\n\nUnfound Message```")
     except discord.HTTPException as e:
-        await ctx.send(f"```ini\n[ Reaction Add ]\n\nError {e}```")
+        await ctx.reply(f"```ini\n[ Reaction Add ]\n\nError {e}```")
         
 @bot.command()
 async def sendmsg(ctx, *, message: str):
     if ctx.author.id not in AUTHORIZED_USER_ID:
-        await ctx.send("```ini\n[ Send Message ]\n\nYou are not allowed to use this command```")
+        await ctx.reply("```ini\n[ Send Message ]\n\nYou are not allowed to use this command```")
         return
     await ctx.send(message)
 
 @bot.command()
 async def replymsg(ctx, *, message: str):
     if ctx.author.id not in AUTHORIZED_USER_ID:
-        await ctx.send("```ini\n[ Reply Message ]\n\nYou are not allowed to use this command```")
+        await ctx.reply("```ini\n[ Reply Message ]\n\nYou are not allowed to use this command```")
         return
     await ctx.reply(message)
 
